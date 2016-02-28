@@ -1,8 +1,10 @@
 # Scheduler
 
-- write randomOS(U) function that reads a random non-negative integer from a file of random-numbers 
-    >> do we read a random line from the random-numbers file?
-    
+- write randomOS(U) function that reads a random non-negative integer from a file of random-numbers ***
+
+- write a function to sort the processes ArrayList 
+
+
 
 - Implement FCFS scheduling function 
     
