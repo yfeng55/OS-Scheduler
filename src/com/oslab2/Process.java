@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Process {
+public class Process{
 
     private static final String RANDOM_NUMBERS_FILE = "random-numbers.txt";
 
@@ -67,5 +67,6 @@ public class Process {
 
         return 1 + (randomint % u);
     }
+
 
 }

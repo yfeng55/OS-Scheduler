@@ -2,8 +2,7 @@ package com.oslab2;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class Main {
@@ -19,11 +18,10 @@ public class Main {
         File file = new File(INPUT_FILE);
         processes = readInputFromFile(file);
 
-        FCFS(processes);
-
         printProcessList(processes);
 
 
+        FCFS(processes);
 
 
     }
@@ -34,8 +32,24 @@ public class Main {
     // 1. First-Come-First-Serve Scheduling //
     public static void FCFS(ArrayList<Process> processes){
 
+        Queue<Process> ready_processes = new LinkedList<Process>();
+
         //place processes in queue in order of arrival time
+        processes = Util.sortProcessList(processes);
+
+        for(Process process : processes){
+            ready_processes.add(process);
+        }
+
+        // dequeue all elements
+        while(!ready_processes.isEmpty()){
+            System.out.println(ready_processes.poll().toString());
+        }
+
+
         
+
+
 
     }
 
@@ -66,6 +80,7 @@ public class Main {
         for(Process process : processes){
             System.out.println(process.toString());
         }
+        System.out.println("\n");
     }
 
 
