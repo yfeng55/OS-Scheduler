@@ -8,24 +8,28 @@ import java.util.*;
 public class Main {
 
     private static final String INPUT_FILE = "input.txt";
+    private static final String RANDOM_NUMBERS_FILE = "random-numbers.txt";
 
     private static int number_of_processes;
     private static ArrayList<Process> processes = null;
 
+    private static Scanner rand_scanner = null;
+
+
 
     public static void main(String[] args) throws FileNotFoundException {
 
+        rand_scanner = new Scanner(new File(RANDOM_NUMBERS_FILE));
         File file = new File(INPUT_FILE);
-        processes = readInputFromFile(file);
+
+        processes = readInputFromFile(file, rand_scanner);
 
         printProcessList(processes);
 
 
         FCFS(processes);
 
-
     }
-
 
 
 
@@ -43,11 +47,13 @@ public class Main {
 
         // dequeue all elements
         while(!ready_processes.isEmpty()){
-            System.out.println(ready_processes.poll().toString());
+//            System.out.println(ready_processes.poll().toString());
+
+
         }
 
 
-        
+
 
 
 
@@ -55,12 +61,13 @@ public class Main {
 
 
 
-    private static ArrayList readInputFromFile(File file) throws FileNotFoundException {
+    private static ArrayList readInputFromFile(File file, Scanner random_scanner) throws FileNotFoundException {
         ArrayList<Process> processes = new ArrayList<Process>();
 
         Scanner input = new Scanner(file);
         number_of_processes = input.nextInt();
 
+        int i=0;
         while(input.hasNext()){
             int a, b, c, io;
 
@@ -69,7 +76,8 @@ public class Main {
             c = Integer.parseInt(input.next().replaceAll("[\\D]", ""));
             io = Integer.parseInt(input.next().replaceAll("[\\D]", ""));
 
-            processes.add(new Process(a, b, c, io));
+            processes.add(new Process(i, a, b, c, io));
+            i++;
         }
 
         return processes;
@@ -84,6 +92,13 @@ public class Main {
     }
 
 
+    // generate a random number
+    private static int randomOS(int u) throws FileNotFoundException {
+        int random_int = Integer.parseInt(rand_scanner.next());
+        System.out.println(random_int);
+
+        return random_int;
+    }
 
 
 
