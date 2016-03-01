@@ -10,7 +10,7 @@ public class Util {
 
 
     // sort an ArrayList of Process objects
-    public static ArrayList<Process> sortProcessList(ArrayList<Process> processes){
+    public static ArrayList<Process> sortProcessListByArrival(ArrayList<Process> processes){
 
         Collections.sort(processes, new Comparator<Process>() {
 
@@ -26,6 +26,27 @@ public class Util {
 
         return processes;
     }
+
+
+    public static ArrayList<Process> sortProcessListById(ArrayList<Process> processes){
+
+        Collections.sort(processes, new Comparator<Process>() {
+
+            public int compare(Process p1, Process p2) {
+                if (p1.id == p2.id) {
+                    return 0;
+                }
+
+                return p1.id < p2.id ? -1 : 1;
+            }
+
+        });
+
+        return processes;
+    }
+
+
+
 
 
 

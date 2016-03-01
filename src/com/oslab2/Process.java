@@ -10,9 +10,10 @@ public class Process{
     //upper bounds for randOS()
     public int b;
     public int io;
+    public int c;
 
     public int arrival_time;
-    public int cpu_time_needed;
+    public int cpu_time_left;
 
     public int cpu_burst;
     public int io_burst;
@@ -30,7 +31,8 @@ public class Process{
 
         this.arrival_time = a;
         this.b = b;
-        this.cpu_time_needed = c;
+        this.c = c;
+        this.cpu_time_left = c;
         this.io = io;
 
     }
@@ -43,13 +45,25 @@ public class Process{
         outputstring += String.format("%s", "{id: " + Integer.toString(id));
         outputstring += String.format("%s", ", arrival_time: " + Integer.toString(arrival_time));
         outputstring += String.format("%s", ", b: " + Integer.toString(b));
-        outputstring += String.format("%s", ", cpu_time_needed: " + Integer.toString(cpu_time_needed));
+        outputstring += String.format("%s", ", cpu_time_left: " + Integer.toString(cpu_time_left));
         outputstring += String.format("%s", ", io: " + Integer.toString(io)) + "}";
 
         return outputstring;
     }
 
 
+    public String summary(){
+
+        String outputstring = "Process " + id;
+
+        outputstring += "\n\t (A,B,C,IO) = " + "(" + arrival_time + "," + b + "," + c + "," + io + ")";
+        outputstring += "\n\t Finishing time: " + finishing_time;
+        outputstring += "\n\t Turnaround time: " + turnaround_time;
+        outputstring += "\n\t I/O time: " + io_time;
+        outputstring += "\n\t Waiting time: " + waiting_time;
+
+        return outputstring;
+    }
 
 
 
