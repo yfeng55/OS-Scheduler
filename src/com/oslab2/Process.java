@@ -17,7 +17,7 @@ public class Process{
     public int cpu_burst;
     public int io_burst;
 
-    public int waiting_time;
+    public int waiting_time = 0;
     public int finishing_time;
     public int turnaround_time;
     public int io_time;
@@ -40,11 +40,11 @@ public class Process{
 
         String outputstring = "";
 
-        outputstring += String.format("%-23s", "PID: " + Integer.toString(id));
-        outputstring += String.format("%-23s", "Arrival Time: " + Integer.toString(arrival_time));
-        outputstring += String.format("%-23s", "B: " + Integer.toString(b));
-        outputstring += String.format("%-23s", "CPU Time Needed: " + Integer.toString(cpu_time_needed));
-        outputstring += String.format("%-23s", "IO: " + Integer.toString(io));
+        outputstring += String.format("%s", "{id: " + Integer.toString(id));
+        outputstring += String.format("%s", ", arrival_time: " + Integer.toString(arrival_time));
+        outputstring += String.format("%s", ", b: " + Integer.toString(b));
+        outputstring += String.format("%s", ", cpu_time_needed: " + Integer.toString(cpu_time_needed));
+        outputstring += String.format("%s", ", io: " + Integer.toString(io)) + "}";
 
         return outputstring;
     }
