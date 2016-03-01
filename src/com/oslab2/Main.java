@@ -37,22 +37,24 @@ public class Main {
     public static void FCFS(ArrayList<Process> processes){
 
         Queue<Process> ready_processes = new LinkedList<Process>();
+        HashSet<Process> finished_processes = new HashSet<Process>();
+        HashSet<Process> blocked_processes = new HashSet<Process>();
 
-        //place processes in queue in order of arrival time
+        //place processes in ready queue in order of arrival time
         processes = Util.sortProcessList(processes);
-
         for(Process process : processes){
             ready_processes.add(process);
         }
 
         // dequeue all elements
-        while(!ready_processes.isEmpty()){
+//        while(!ready_processes.isEmpty()){
 //            System.out.println(ready_processes.poll().toString());
+//        }
 
-
+        while(finished_processes.size() < number_of_processes){
+            finished_processes.add(ready_processes.poll());
+            System.out.println("finished");
         }
-
-
 
 
 
