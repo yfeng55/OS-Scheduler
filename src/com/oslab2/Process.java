@@ -7,6 +7,9 @@ public class Process{
 
     public int id;
 
+    //track the process' state
+    public String state;
+
     //upper bounds for randOS()
     public int b;
     public int io;
@@ -16,7 +19,7 @@ public class Process{
     public int cpu_time_left;
 
     public int cpu_burst;
-    public int io_burst;
+    public int io_burst = -99999;
 
     public int waiting_time = 0;
     public int finishing_time;
@@ -34,6 +37,8 @@ public class Process{
         this.c = c;
         this.cpu_time_left = c;
         this.io = io;
+
+        this.state = "unstarted";
 
     }
 

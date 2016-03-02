@@ -28,7 +28,7 @@ public class Main {
         printProcessList(processes);
 
 
-        Schedulers.FCFS(processes, number_of_processes, rand_scanner);
+        Schedulers.FCFS(processes, number_of_processes, rand_scanner, true);
 
     }
 
