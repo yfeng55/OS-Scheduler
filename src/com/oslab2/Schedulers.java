@@ -100,13 +100,15 @@ public class Schedulers {
             // start a running process if there are no running processes
             if(running_process == null && !ready_processes.isEmpty()){
 
+                if(ready_processes.peek().arrival_time != cycle || cycle == 0){
+                    Process p = ready_processes.poll();
+                    running_process = p;
+                    p.state = "running";
 
-                Process p = ready_processes.poll();
-                running_process = p;
-                p.state = "running";
+                    // give the running process a new cpu_burst value
+                    running_process.cpu_burst = randomOS(running_process.b);
+                }
 
-                // give the running process a new cpu_burst value
-                running_process.cpu_burst = randomOS(running_process.b);
 
             }
 
