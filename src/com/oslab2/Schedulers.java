@@ -22,7 +22,7 @@ public class Schedulers {
         Process running_process = null;
         LinkedBlockingQueue<Process> sorted_processes = new LinkedBlockingQueue<Process>();
         LinkedBlockingQueue<Process> ready_processes = new LinkedBlockingQueue<Process>();
-        HashSet<Process> blocked_processes = new HashSet<Process>();
+        ArrayList<Process> blocked_processes = new ArrayList<Process>();
         ArrayList<Process> finished_processes = new ArrayList<Process>();
 
 
@@ -114,16 +114,29 @@ public class Schedulers {
 
             //handle IO for blocked processes
             if(!blocked_processes.isEmpty()){
+
+                ArrayList<Process> remove_items = new ArrayList<Process>();
+
                 for(Process p : blocked_processes) {
                     // decrease IO burst
                     p.io_burst--;
 
                     if(p.io_burst == 0){
-                        p.state = "ready";
-                        ready_processes.add(p);
-                        blocked_processes.remove(p);
+
+                        if(running_process == null){
+                            p.state = "running";
+                            running_process = p;
+                            running_process.cpu_burst = randomOS(running_process.b);
+                            remove_items.add(p);
+                        }else{
+                            p.state = "ready";
+                            ready_processes.add(p);
+                            remove_items.add(p);
+                        }
+
                     }
                 }
+                blocked_processes.removeAll(remove_items);
             }
             //handle IO for blocked processes
             if(!blocked_processes.isEmpty()){
