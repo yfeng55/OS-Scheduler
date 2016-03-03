@@ -3,12 +3,11 @@ package com.oslab2;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
-import java.util.concurrent.LinkedBlockingQueue;
 
 
 public class Main {
 
-    private static final String INPUT_FILE = "input.txt";
+    private static final String INPUT_FILE = "input7.txt";
     private static final String RANDOM_NUMBERS_FILE = "random-numbers.txt";
 
     private static int number_of_processes;
@@ -28,7 +27,7 @@ public class Main {
         printProcessList(processes);
 
 
-        Schedulers.FCFS(processes, number_of_processes, rand_scanner, true);
+        FCFS.FCFS(processes, number_of_processes, rand_scanner, true);
 
     }
 

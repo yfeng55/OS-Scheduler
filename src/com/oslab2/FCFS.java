@@ -1,14 +1,11 @@
 package com.oslab2;
 
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class Schedulers {
+public class FCFS {
 
 
     private static Scanner rand_scanner = null;
@@ -61,17 +58,32 @@ public class Schedulers {
 
 
 
-            // add all processes with current arrival_time to ready
-            while (!sorted_processes.isEmpty() && sorted_processes.peek().arrival_time == cycle){
-                Process p = sorted_processes.poll();
-                p.state = "ready";
-                ready_processes.add(p);
+            ///// DO_BLOCKED /////
+            if(!blocked_processes.isEmpty()){
+
+                ArrayList<Process> remove_items = new ArrayList<Process>();
+
+                for(Process p : blocked_processes) {
+                    // decrease IO burst
+                    p.io_burst--;
+
+                    if(p.io_burst == 0){
+
+                            //TODO: implement tiebreaker
+
+                            p.state = "ready";
+                            ready_processes.add(p);
+                            remove_items.add(p);
+
+                    }
+                }
+                blocked_processes.removeAll(remove_items);
             }
 
 
 
 
-            // run the running process
+            ////// DO_RUNNING //////
             if(running_process != null){
 
                 running_process.cpu_time_left--;
@@ -92,14 +104,28 @@ public class Schedulers {
                 else if(running_process.cpu_burst == 0){
                     running_process.state = "blocked";
                     blocked_processes.add(running_process);
+                    running_process.io_burst = randomOS(running_process.io);
+
                     running_process = null;
                 }
 
             }
 
-            // start a running process if there are no running processes
+
+
+            ////// DO_ARRIVING //////
+            while (!sorted_processes.isEmpty() && sorted_processes.peek().arrival_time == cycle){
+                Process p = sorted_processes.poll();
+                p.state = "ready";
+                ready_processes.add(p);
+            }
+
+
+
+            ///// DO_READY /////
             if(running_process == null && !ready_processes.isEmpty()){
 
+                // start a running process if there are no running processes
                 if(ready_processes.peek().arrival_time != cycle || cycle == 0){
                     Process p = ready_processes.poll();
                     running_process = p;
@@ -109,63 +135,16 @@ public class Schedulers {
                     running_process.cpu_burst = randomOS(running_process.b);
                 }
 
-
             }
 
 
-
-            //handle IO for blocked processes
-            if(!blocked_processes.isEmpty()){
-
-                ArrayList<Process> remove_items = new ArrayList<Process>();
-
-                for(Process p : blocked_processes) {
-                    // decrease IO burst
-                    p.io_burst--;
-
-                    if(p.io_burst == 0){
-
-                        if(running_process == null){
-                            p.state = "running";
-                            running_process = p;
-                            running_process.cpu_burst = randomOS(running_process.b);
-                            remove_items.add(p);
-                        }else{
-                            p.state = "ready";
-                            ready_processes.add(p);
-                            remove_items.add(p);
-                        }
-
-                    }
-                }
-                blocked_processes.removeAll(remove_items);
-            }
-            //handle IO for blocked processes
-            if(!blocked_processes.isEmpty()){
-                for(Process p : blocked_processes){
-
-                    //if io burst is unassigned, get a new io burst for the blocked process
-                    if(p.io_burst < 0){
-                        p.io_burst = randomOS(p.io);
-                    }
-
-
-                }
-            }
-
-
-
-
-
-
-            // increase wait times of all ready processes
-//            for(Process process : ready_processes){
-//                process.waiting_time++;
-//            }
 
 
             cycle++;
         }
+        ///// END FCFS LOOP /////
+
+
 
 
         //print summary of all processes (orderd by id)
@@ -180,12 +159,11 @@ public class Schedulers {
 
 
 
-
     // generate a random number
     private static int randomOS(int u) throws FileNotFoundException {
         int random_int = rand_scanner.nextInt();
 
-        System.out.println("Find burst " + random_int);
+//        System.out.println("Find burst " + random_int);
 
         return 1 + (random_int % u);
     }
