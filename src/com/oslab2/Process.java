@@ -43,7 +43,7 @@ public class Process{
     }
 
 
-    public String toString(){
+    public String toDetailedString(){
 
         String outputstring = "";
 
@@ -55,6 +55,13 @@ public class Process{
 
         return outputstring;
     }
+
+
+    public String toString(){
+
+        return Integer.toString(arrival_time) + " " + Integer.toString(b) + " " + Integer.toString(c) + " " + Integer.toString(io);
+    }
+
 
 
     public String summary(){

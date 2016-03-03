@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Main {
 
-    private static final String INPUT_FILE = "input7.txt";
+    private static final String INPUT_FILE = "input1.txt";
     private static final String RANDOM_NUMBERS_FILE = "random-numbers.txt";
 
     private static int number_of_processes;
@@ -24,13 +24,10 @@ public class Main {
 
         processes = readInputFromFile(file, rand_scanner);
 
-        printProcessList(processes);
-
 
         FCFS.FCFS(processes, number_of_processes, rand_scanner, true);
 
     }
-
 
 
 
@@ -60,7 +57,7 @@ public class Main {
     // print the list of all processes
     private static void printProcessList(ArrayList<Process> processes){
         for(Process process : processes){
-            System.out.println(process.toString());
+            System.out.println(process.toDetailedString());
         }
         System.out.println("\n");
     }

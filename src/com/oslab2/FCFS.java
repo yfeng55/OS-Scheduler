@@ -28,14 +28,31 @@ public class FCFS {
         int io_cycles = 0;
 
 
-        //place processes in ready queue in order of arrival time
+        //print original input
+        System.out.print("The original input was: ");
+        for(Process p : processes){
+            System.out.print(p.toString() + " ");
+        }
+
+        //place processes in ready queue in order of arrival time and print
         processes = Util.sortProcessListByArrival(processes);
+        System.out.print("\nThe (sorted) input is: ");
+        for(Process p : processes){
+            System.out.print(" " + p.toString());
+        }
+        System.out.println("\n");
+        if(verbose_flag){
+            System.out.println("This detailed printout gives the state and remaining burst for each process\n");
+        }
+
 
         //add processes to sorted_processes and correct the initial ID fields
         for(int i=0; i<processes.size(); i++){
             processes.get(i).id = i;
             sorted_processes.add(processes.get(i));
         }
+
+
 
 
         while(finished_processes.size() < number_of_processes){
@@ -157,7 +174,7 @@ public class FCFS {
 
         //print summary of all processes (orderd by id)
         finished_processes = Util.sortProcessListById(finished_processes);
-        System.out.println();
+        System.out.println("The scheduling algorithm used was First Come First Served\n");
         for(Process p : finished_processes){
             p.turnaround_time = p.finishing_time - p.arrival_time;
             p.waiting_time = p.finishing_time - p.c - p.io_time - p.arrival_time;
@@ -180,13 +197,12 @@ public class FCFS {
         System.out.println("\tFinishing time: " + (cycle-1));
         System.out.println("\tCPU Utilization: " + (float)cpu_cycles/(cycle-1));
         System.out.println("\tI/O Utilization: " + (float)io_cycles/(cycle-1));
-        System.out.println("\tThroughput: " + (float)number_of_processes/(cycle-1) * 100);
+        System.out.println("\tThroughput: " + (float)number_of_processes/(cycle-1) * 100 + " processes per hundred cycles");
         System.out.println("\tAverage turnaround time: " + avg_turnaround);
         System.out.println("\tAverage waiting time: " + avg_waiting);
 
 
     }
-
 
 
     // generate a random number
