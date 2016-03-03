@@ -61,7 +61,7 @@ public class FCFS {
             ///// DO_BLOCKED /////
             if(!blocked_processes.isEmpty()){
 
-                ArrayList<Process> remove_items = new ArrayList<Process>();
+                ArrayList<Process> finished_io = new ArrayList<Process>();
 
                 for(Process p : blocked_processes) {
                     // decrease IO burst
@@ -69,15 +69,24 @@ public class FCFS {
 
                     if(p.io_burst == 0){
 
-                            //TODO: implement tiebreaker
+                        //TODO: implement tiebreaker
 
-                            p.state = "ready";
-                            ready_processes.add(p);
-                            remove_items.add(p);
+
+                        p.state = "ready";
+                        finished_io.add(p);
+
+//                        ready_processes.add(p);
+
+
 
                     }
                 }
-                blocked_processes.removeAll(remove_items);
+
+                finished_io = Util.sortByArrivalThenID(finished_io);
+
+                ready_processes.addAll(finished_io);
+
+                blocked_processes.removeAll(finished_io);
             }
 
 
