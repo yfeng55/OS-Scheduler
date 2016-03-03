@@ -27,10 +27,14 @@ public class FCFS {
         int cpu_time = 0;
         int io_time = 0;
 
+
         //place processes in ready queue in order of arrival time
         processes = Util.sortProcessListByArrival(processes);
-        for(Process process : processes){
-            sorted_processes.add(process);
+
+        //add processes to sorted_processes and correct the initial ID fields
+        for(int i=0; i<processes.size(); i++){
+            processes.get(i).id = i;
+            sorted_processes.add(processes.get(i));
         }
 
 
