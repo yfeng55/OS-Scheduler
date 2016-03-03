@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Main {
 
-    private static final String INPUT_FILE = "input1.txt";
+    private static final String INPUT_FILE = "input6.txt";
     private static final String RANDOM_NUMBERS_FILE = "random-numbers.txt";
 
     private static int number_of_processes;
@@ -21,12 +21,12 @@ public class Main {
 
         rand_scanner = new Scanner(new File(RANDOM_NUMBERS_FILE));
         File file = new File(INPUT_FILE);
-
         processes = readInputFromFile(file, rand_scanner);
 
 
-        FCFS.FCFS(processes, number_of_processes, rand_scanner, true);
+//        FCFS.FCFS(processes, number_of_processes, rand_scanner, true);
 
+        LCFS.LCFS(processes, number_of_processes, rand_scanner, true);
     }
 
 
