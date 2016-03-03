@@ -2,6 +2,7 @@ package com.oslab2;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.Stack;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -36,12 +37,21 @@ public class LCFS {
             System.out.print(p.toString() + " ");
         }
 
-        //place processes in ready queue in order of arrival time and print
-        processes = Util.sortProcessListByArrival_Desc(processes);
+        processes = Util.sortProcessListByArrival(processes);
+        //print sorted input
         System.out.print("\nThe (sorted) input is: ");
         for(Process p : processes){
             System.out.print(" " + p.toString());
         }
+
+
+
+        //place processes in ready queue in order of arrival time and print
+        ArrayList<Process> reversedList = new ArrayList<Process>(processes);
+        Collections.reverse(reversedList);
+        processes = Util.sortProcessListByArrival_Desc(reversedList);
+
+
         System.out.println("\n");
         if(verbose_flag){
             System.out.println("This detailed printout gives the state and remaining burst for each process\n");
@@ -66,18 +76,18 @@ public class LCFS {
             if(verbose_flag){
                 System.out.print(String.format("%-23s", "Before cycle " + cycle + ":"));
 
-                for(Process p : processes){
+                for(int i=processes.size()-1; i>=0; i--){
                     int burst;
-                    if(p.state.equals("blocked")){
-                        burst = p.io_burst;
+                    if(processes.get(i).state.equals("blocked")){
+                        burst = processes.get(i).io_burst;
                     }
-                    else if(p.state.equals("running")){
-                        burst = p.cpu_burst;
+                    else if(processes.get(i).state.equals("running")){
+                        burst = processes.get(i).cpu_burst;
                     }
                     else{
                         burst = 0;
                     }
-                    System.out.print(String.format("%-16s", p.state + " " + Integer.toString(burst)));
+                    System.out.print(String.format("%-16s", processes.get(i).state + " " + Integer.toString(burst)));
                 }
                 System.out.println();
             }
@@ -103,7 +113,7 @@ public class LCFS {
                     }
                 }
 
-                finished_io = Util.sortByArrivalThenID(finished_io);
+                finished_io = Util.sortByArrivalThenID_Desc(finished_io);
 
                 ready_processes.addAll(finished_io);
 
