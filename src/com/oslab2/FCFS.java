@@ -70,6 +70,7 @@ public class FCFS {
                 for(Process p : blocked_processes) {
                     // decrease IO burst
                     p.io_burst--;
+                    p.io_time++;
 
                     if(p.io_burst == 0){
 
@@ -163,9 +164,14 @@ public class FCFS {
         //print summary of all processes (orderd by id)
         finished_processes = Util.sortProcessListById(finished_processes);
         System.out.println();
-        for(Process process : finished_processes){
-            System.out.println(process.summary() + "\n");
+        for(Process p : finished_processes){
+            p.turnaround_time = p.finishing_time - p.arrival_time;
+            p.waiting_time = p.finishing_time - p.c - p.io_time - p.arrival_time;
+            System.out.println(p.summary() + "\n");
         }
+
+
+
 
 
     }
