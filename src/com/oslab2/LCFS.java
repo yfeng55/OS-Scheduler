@@ -1,10 +1,7 @@
 package com.oslab2;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 
 
@@ -20,7 +17,7 @@ public class LCFS {
         rand_scanner = scanner;
 
         Process running_process = null;
-        LinkedBlockingQueue<Process> sorted_processes = new LinkedBlockingQueue<Process>();
+        LinkedList<Process> sorted_processes = new LinkedList<Process>();
         Stack<Process> ready_processes = new Stack<Process>();
         ArrayList<Process> blocked_processes = new ArrayList<Process>();
         ArrayList<Process> finished_processes = new ArrayList<Process>();
@@ -47,9 +44,9 @@ public class LCFS {
 
 
         //place processes in ready queue in order of arrival time and print
-        ArrayList<Process> reversedList = new ArrayList<Process>(processes);
-        Collections.reverse(reversedList);
-        processes = Util.sortProcessListByArrival_Desc(reversedList);
+//        ArrayList<Process> reversedList = new ArrayList<Process>(processes);
+//        Collections.reverse(reversedList);
+       processes = Util.sortProcessListByArrival_Desc(processes);
 
 
         System.out.println("\n");
@@ -154,10 +151,30 @@ public class LCFS {
 
 
             ////// DO_ARRIVING //////
-            while (!sorted_processes.isEmpty()){
-                Process p = sorted_processes.poll();
-                p.state = "ready";
-                ready_processes.add(p);
+            if (!sorted_processes.isEmpty() && sorted_processes.peekLast().arrival_time == cycle){
+
+                if(sorted_processes.size() > 1){
+                    Iterator iterator = sorted_processes.listIterator(sorted_processes.indexOf(sorted_processes.getLast())-1);
+                    ArrayList<Process> to_remove = new ArrayList<Process>();
+
+                    while(iterator.hasNext()){
+                        Process p = (Process) iterator.next();
+                        to_remove.add(p);
+
+                        p.state = "ready";
+                        ready_processes.add(p);
+                    }
+
+                    sorted_processes.removeAll(to_remove);
+                }
+                else{
+                    Process p = sorted_processes.getLast();
+                    p.state = "ready";
+
+                    sorted_processes.remove(p);
+                    ready_processes.add(p);
+                }
+
             }
 
 

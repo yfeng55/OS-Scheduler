@@ -1,6 +1,6 @@
 # Scheduler
 
-- fix input4, input5 for LCFS
+- fix input4 for LCFS
 - 
 
 
