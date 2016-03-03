@@ -24,8 +24,8 @@ public class FCFS {
 
 
         int cycle = 0;
-        int cpu_time = 0;
-        int io_time = 0;
+        int cpu_cycles = 0;
+        int io_cycles = 0;
 
 
         //place processes in ready queue in order of arrival time
@@ -71,18 +71,12 @@ public class FCFS {
                     // decrease IO burst
                     p.io_burst--;
                     p.io_time++;
+                    io_cycles++;
 
                     if(p.io_burst == 0){
 
-                        //TODO: implement tiebreaker
-
-
                         p.state = "ready";
                         finished_io.add(p);
-
-//                        ready_processes.add(p);
-
-
 
                     }
                 }
@@ -102,7 +96,7 @@ public class FCFS {
 
                 running_process.cpu_time_left--;
                 running_process.cpu_burst--;
-                cpu_time++;
+                cpu_cycles++;
 
 
                 // handle finished processes
@@ -171,7 +165,24 @@ public class FCFS {
         }
 
 
+        //print a summary of the entire scheduling process
 
+        float avg_turnaround = 0;
+        float avg_waiting = 0;
+        for(Process p : finished_processes){
+            avg_turnaround += p.turnaround_time;
+            avg_waiting += p.waiting_time;
+        }
+        avg_turnaround = avg_turnaround / number_of_processes;
+        avg_waiting = avg_waiting / number_of_processes;
+
+        System.out.println("Summary Data: ");
+        System.out.println("\tFinishing time: " + (cycle-1));
+        System.out.println("\tCPU Utilization: " + (float)cpu_cycles/(cycle-1));
+        System.out.println("\tI/O Utilization: " + (float)io_cycles/(cycle-1));
+        System.out.println("\tThroughput: " + (float)number_of_processes/(cycle-1) * 100);
+        System.out.println("\tAverage turnaround time: " + avg_turnaround);
+        System.out.println("\tAverage waiting time: " + avg_waiting);
 
 
     }
