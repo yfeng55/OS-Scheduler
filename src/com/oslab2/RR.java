@@ -59,6 +59,8 @@ public class RR {
 
         while(finished_processes.size() < number_of_processes){
 
+            ArrayList<Process> add_to_ready = new ArrayList<Process>();
+
             // print process states before starting cycle if verbose flag is set to true
             if(verbose_flag){
                 System.out.print(String.format("%-23s", "Before cycle " + cycle + ":"));
@@ -102,7 +104,7 @@ public class RR {
 
                 finished_io = Util.sortByArrivalThenID(finished_io);
 
-                ready_processes.addAll(finished_io);
+                add_to_ready.addAll(finished_io);
 
                 blocked_processes.removeAll(finished_io);
             }
@@ -141,7 +143,7 @@ public class RR {
                 // if the running process has used up its quantum, move it to the ready state
                 else if(running_process.quantum == 0){
                     running_process.state = "ready";
-                    ready_processes.add(running_process);
+                    add_to_ready.add(running_process);
                     running_process = null;
                 }
 
@@ -154,10 +156,12 @@ public class RR {
             while (!sorted_processes.isEmpty() && sorted_processes.peek().arrival_time == cycle){
                 Process p = sorted_processes.poll();
                 p.state = "ready";
-                ready_processes.add(p);
+                add_to_ready.add(p);
             }
 
 
+            add_to_ready = Util.sortByArrivalThenID(add_to_ready);
+            ready_processes.addAll(add_to_ready);
 
             ///// DO_READY /////
             if(running_process == null && !ready_processes.isEmpty()){

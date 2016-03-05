@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Main {
 
-    private static final String INPUT_FILE = "input1.txt";
+    private static final String INPUT_FILE = "input7.txt";
     private static final String RANDOM_NUMBERS_FILE = "random-numbers.txt";
 
     private static int number_of_processes;
