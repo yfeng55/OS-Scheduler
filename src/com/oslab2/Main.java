@@ -28,7 +28,9 @@ public class Main {
 
 //        LCFS.LCFS(processes, number_of_processes, rand_scanner, true);
 
-        HPRN.HPRN(processes, number_of_processes, rand_scanner, true);
+//        HPRN.HPRN(processes, number_of_processes, rand_scanner, true);
+
+        RR.RR(processes, number_of_processes, rand_scanner, true);
 
 
     }

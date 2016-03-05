@@ -10,7 +10,12 @@ public class Process{
     //track the process' state
     public String state;
 
+    //penalty ratio used by HPRN
     public float penalty_ratio;
+
+    //quantum used by RR
+    public int quantum;
+
 
     //upper bounds for randOS()
     public int b;
