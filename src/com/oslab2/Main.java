@@ -26,7 +26,11 @@ public class Main {
 
 //        FCFS.FCFS(processes, number_of_processes, rand_scanner, true);
 
-        LCFS.LCFS(processes, number_of_processes, rand_scanner, true);
+//        LCFS.LCFS(processes, number_of_processes, rand_scanner, true);
+
+        HPRN.HPRN(processes, number_of_processes, rand_scanner, true);
+
+
     }
 
 

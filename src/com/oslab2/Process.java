@@ -10,6 +10,8 @@ public class Process{
     //track the process' state
     public String state;
 
+    public float penalty_ratio;
+
     //upper bounds for randOS()
     public int b;
     public int io;

@@ -10,11 +10,10 @@
     - fix summary data for input4 (output order & waiting times), input5 (IO utilization)
 
 
-(3) HPRN
+(3) HPRN ***
 
 
-
-(4) Round-Robin
+(4) Round-Robin 
 
 
 --------------------------------------------------------
