@@ -7,11 +7,11 @@
 (4) Round-Robin ***
 
 
-(5) check that non-verbose output works 
+(5) check that non-verbose output works ***
 
-(6) add input file parameter 
+(6) add input file parameter ***
 
-(7) print output for all algorithms at once 
+(7) print output for all algorithms at once ***
 
 
 --------------------------------------------------------
