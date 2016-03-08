@@ -2,6 +2,7 @@
 
 
 (1) FCFS
+    - fix IO utilization for input4
     - fix IO utilization for input5 
 
 
@@ -19,3 +20,16 @@
 
 
 --------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+

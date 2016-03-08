@@ -31,6 +31,7 @@ public class HPRN {
 
         //print original input
         System.out.print("The original input was: ");
+        System.out.print(processes.size() + " ");
         for(Process p : processes){
             System.out.print(p.toString() + " ");
         }
@@ -39,6 +40,7 @@ public class HPRN {
         //place processes in ready queue in order of arrival time and print
         processes = Util.sortProcessListByArrival(processes);
         System.out.print("\nThe (sorted) input is: ");
+        System.out.print(" " + processes.size());
         for(Process p : processes){
             System.out.print(" " + p.toString());
         }
@@ -85,12 +87,12 @@ public class HPRN {
             if(!blocked_processes.isEmpty()){
 
                 ArrayList<Process> finished_io = new ArrayList<Process>();
+                io_cycles++;
 
                 for(Process p : blocked_processes) {
                     // decrease IO burst
                     p.io_burst--;
                     p.io_time++;
-                    io_cycles++;
 
                     if(p.io_burst == 0){
 
@@ -213,11 +215,30 @@ public class HPRN {
 
         System.out.println("Summary Data: ");
         System.out.println("\tFinishing time: " + (cycle-1));
-        System.out.println("\tCPU Utilization: " + (float)cpu_cycles/(cycle-1));
-        System.out.println("\tI/O Utilization: " + (float)io_cycles/(cycle-1));
-        System.out.println("\tThroughput: " + (float)number_of_processes/(cycle-1) * 100 + " processes per hundred cycles");
-        System.out.println("\tAverage turnaround time: " + avg_turnaround);
-        System.out.println("\tAverage waiting time: " + avg_waiting);
+
+
+        System.out.print("\tCPU Utilization: ");
+        System.out.printf("%.6f", (float)cpu_cycles/(cycle-1));
+        System.out.println();
+
+
+        System.out.print("\tI/O Utilization: ");
+        System.out.printf("%.6f", (float) io_cycles / (cycle - 1));
+        System.out.println();
+
+
+        System.out.print("\tThroughput: ");
+        System.out.printf("%.6f", (float) number_of_processes / (cycle - 1) * 100);
+        System.out.println(" processes per hundred cycles");
+
+
+        System.out.print("\tAverage turnaround time: ");
+        System.out.printf("%.6f", avg_turnaround);
+        System.out.println();
+
+        System.out.print("\tAverage waiting time: ");
+        System.out.printf("%.6f", avg_waiting);
+        System.out.println();
 
 
     }

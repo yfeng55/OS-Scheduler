@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Main {
 
-    private static final String INPUT_FILE = "input7.txt";
+    private static final String INPUT_FILE = "input1.txt";
     private static final String RANDOM_NUMBERS_FILE = "random-numbers.txt";
 
     private static int number_of_processes;
@@ -24,13 +24,26 @@ public class Main {
         processes = readInputFromFile(file, rand_scanner);
 
 
-//        FCFS.FCFS(processes, number_of_processes, rand_scanner, true);
+        if(args.length == 0){
+            FCFS.FCFS(processes, number_of_processes, rand_scanner, false);
+//        LCFS.LCFS(processes, number_of_processes, rand_scanner, false);
+//        HPRN.HPRN(processes, number_of_processes, rand_scanner, false);
+//        RR.RR(processes, number_of_processes, rand_scanner, false);
+        }
 
+        else if(args[0].equals("--verbose")){
+            FCFS.FCFS(processes, number_of_processes, rand_scanner, true);
 //        LCFS.LCFS(processes, number_of_processes, rand_scanner, true);
-
 //        HPRN.HPRN(processes, number_of_processes, rand_scanner, true);
+//        RR.RR(processes, number_of_processes, rand_scanner, true);
+        }
 
-        RR.RR(processes, number_of_processes, rand_scanner, true);
+        else {
+            throw new IllegalArgumentException("Incorrect arguments. Available arguments are: --verbose");
+        }
+
+
+
 
 
     }
