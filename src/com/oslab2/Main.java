@@ -26,16 +26,16 @@ public class Main {
 
         if(args.length == 0){
 //            FCFS.FCFS(processes, number_of_processes, rand_scanner, false);
-//            LCFS.LCFS(processes, number_of_processes, rand_scanner, false);
+            LCFS.LCFS(processes, number_of_processes, rand_scanner, false);
 //            HPRN.HPRN(processes, number_of_processes, rand_scanner, false);
-            RR.RR(processes, number_of_processes, rand_scanner, false);
+//            RR.RR(processes, number_of_processes, rand_scanner, false);
         }
 
         else if(args[0].equals("--verbose")){
 //            FCFS.FCFS(processes, number_of_processes, rand_scanner, true);
-//            LCFS.LCFS(processes, number_of_processes, rand_scanner, true);
+            LCFS.LCFS(processes, number_of_processes, rand_scanner, true);
 //            HPRN.HPRN(processes, number_of_processes, rand_scanner, true);
-            RR.RR(processes, number_of_processes, rand_scanner, true);
+//            RR.RR(processes, number_of_processes, rand_scanner, true);
         }
 
         else {

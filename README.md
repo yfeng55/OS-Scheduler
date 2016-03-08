@@ -2,12 +2,10 @@
 
 
 (1) FCFS ***
-
-(2) LCFS 
-    - fix input4 
-
+(2) LCFS ***
 (3) HPRN ***
 (4) Round-Robin ***
+
 
 (5) check that non-verbose output works 
 

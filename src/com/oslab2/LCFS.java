@@ -159,29 +159,6 @@ public class LCFS {
             ////// DO_ARRIVING //////
             while (!sorted_processes.isEmpty() && sorted_processes.peekLast().arrival_time == cycle){
 
-//                if(sorted_processes.size() > 1){
-//                    Iterator iterator = sorted_processes.listIterator(sorted_processes.indexOf(sorted_processes.getLast())-1);
-//                    ArrayList<Process> to_remove = new ArrayList<Process>();
-//
-//                    while(iterator.hasNext()){
-//                        Process p = (Process) iterator.next();
-//                        to_remove.add(p);
-//
-//                        p.state = "ready";
-//                        add_to_ready.add(p);
-//                    }
-//
-//                    sorted_processes.removeAll(to_remove);
-//                }
-//                else{
-//                    Process p = sorted_processes.getLast();
-//                    p.state = "ready";
-//
-//                    sorted_processes.remove(p);
-//                    add_to_ready.add(p);
-//                }
-
-
                 Process p = sorted_processes.getLast();
                 sorted_processes.remove(p);
                 p.state = "ready";
@@ -199,7 +176,7 @@ public class LCFS {
             if(running_process == null && !ready_processes.isEmpty()){
 
                 // start a running process if there are no running processes
-                if(ready_processes.peek().arrival_time != cycle || cycle == 0){
+                if(!ready_processes.isEmpty() || cycle == 0){
                     Process p = ready_processes.pop();
                     running_process = p;
                     p.state = "running";
