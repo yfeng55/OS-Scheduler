@@ -80,7 +80,7 @@ public class LCFS {
 
                 for(int i=0; i<processes.size(); i++){
                     int burst;
-                    System.out.print("p" + processes.get(i).id + ": ");
+//                    System.out.print("p" + processes.get(i).id + ": ");
                     if(processes.get(i).state.equals("blocked")){
                         burst = processes.get(i).io_burst;
                     }
