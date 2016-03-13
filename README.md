@@ -1,30 +1,24 @@
-# Scheduler
+# Scheduler Simulation
+
+1. FCFS 
+2. LCFS 
+3. HPRN 
+4. Round-Robin (quantum = 2)
 
 
-(1) FCFS ***
-(2) LCFS ***
-(3) HPRN ***
-(4) Round-Robin ***
+### Instructions for compiling and running:
 
+#### 1. Compiling:
+```sh
+javac *.java
+```
 
-(5) check that non-verbose output works ***
+#### 2. Run the Main file and provide the filename of the input and (optionally) the --verbose flag
 
-(6) add input file parameter ***
+```sh
+java Main inputfile.txt
 
-(7) print output for all algorithms at once ***
-
-
---------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
+java Main --­­verbose inputfile.txt
+```
 
 
